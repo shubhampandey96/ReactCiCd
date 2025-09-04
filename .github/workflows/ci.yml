@@ -14,15 +14,16 @@ jobs:
       - name: "Checkout Repository"
         uses: actions/checkout@v4
 
-      # 🔥 Remove Node 18 (preinstalled by GitHub runner)
-      - name: "Remove Node 18"
+      # 🚨 Force remove Node.js 18.x
+      - name: "Remove preinstalled Node 18"
         run: |
           sudo rm -rf /opt/hostedtoolcache/node/18*
 
-      - name: "Setup Node.js (20.19.0)"
+      - name: "Setup Node.js (20.x)"
         uses: actions/setup-node@v4
         with:
           node-version: "20.19.0"
+          check-latest: true   # 👈 forces latest matching version
           cache: "npm"
 
       - name: "Verify Node.js version"
