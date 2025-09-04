@@ -14,20 +14,20 @@ jobs:
       - name: "Checkout Repository"
         uses: actions/checkout@v4
 
-      # 🚨 Force remove Node.js 18.x
-      - name: "Remove preinstalled Node 18"
+      # 🚨 Remove preinstalled Node versions so it can't fall back to 18.x
+      - name: "Remove preinstalled Node"
         run: |
-          sudo rm -rf /opt/hostedtoolcache/node/18*
+          sudo rm -rf /opt/hostedtoolcache/node
 
-      - name: "Setup Node.js (20.x)"
+      - name: "Setup Node.js (22.12.0)"
         uses: actions/setup-node@v4
         with:
-          node-version: "20.19.0"
-          check-latest: true   # 👈 forces latest matching version
+          node-version: "22.12.0"
+          check-latest: true
           cache: "npm"
 
       - name: "Verify Node.js version"
-        run: node -v   # ✅ should print v20.19.0
+        run: node -v   # ✅ should now print v22.12.0
 
       - name: "Install Dependencies"
         run: npm ci
