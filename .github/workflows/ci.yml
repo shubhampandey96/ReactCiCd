@@ -17,11 +17,14 @@ jobs:
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
-          node-version: "20.19.0"  # ✅ force the exact version Vite requires
+          node-version: "20.19.0"   # 🔥 force exact version
           cache: "npm"
 
+      - name: "Check Node.js version"
+        run: node --version   # 🔍 debug step
+
       - name: "Install Dependencies"
-        run: npm ci   # faster + more reliable than npm install in CI
+        run: npm ci
 
       - name: "Run Build"
         run: npm run build
