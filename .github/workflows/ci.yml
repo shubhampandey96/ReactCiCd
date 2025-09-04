@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - master   # fixed spacing
+      - master
 
 jobs:
   build-and-test:
@@ -17,10 +17,11 @@ jobs:
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # React works well with LTS
+          node-version: "20.19.0"  # ✅ force the exact version Vite requires
+          cache: "npm"
 
       - name: "Install Dependencies"
-        run: npm install
+        run: npm ci   # faster + more reliable than npm install in CI
 
       - name: "Run Build"
         run: npm run build
